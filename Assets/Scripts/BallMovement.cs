@@ -5,8 +5,8 @@ using UnityEngine;
 public class BallMovement : MonoBehaviour
 {
     Vector3 pos = new Vector3();
-    float bulletSpeed = 5.0f;
-    float iBulletSpeed = 5.0f;
+    float bulletSpeed;
+    float iBulletSpeed = 1.0f;
     public RaycastHit2D hit;
     public LayerMask obstacles;
     private Vector3 initialPosition;
@@ -20,6 +20,7 @@ public class BallMovement : MonoBehaviour
     {
         pos = new Vector3(1, 1, 0);
         initialPosition = this.gameObject.transform.position;
+        bulletSpeed = iBulletSpeed;
         ballColor = gameObject.GetComponent<SpriteRenderer>();
         currentNumState = 2; 
     }

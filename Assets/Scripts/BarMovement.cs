@@ -12,7 +12,7 @@ public class BarMovement : MonoBehaviour
     public Sprite _BlueBar;
     public Sprite _RedBar;
     public Sprite _GreenBar;
-
+    public BallMovement _ball; 
     
     private Rigidbody2D rigidbody2d;
 
@@ -48,13 +48,23 @@ public class BarMovement : MonoBehaviour
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
             changeSprite(1);
+            _ball.changeBallColor(1); 
+        }
 
         if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
             changeSprite(2);
+            _ball.changeBallColor(2);
+        }
+
 
         if (Input.GetKeyDown(KeyCode.Alpha3))
-            changeSprite(3); 
+        {
+            changeSprite(3);
+            _ball.changeBallColor(3);
+        }
 
     }
 
