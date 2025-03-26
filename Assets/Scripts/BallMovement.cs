@@ -1,18 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BallMovement : MonoBehaviour
 {
     Vector3 pos = new Vector3();
     float bulletSpeed;
-    float iBulletSpeed = 1.0f;
+    float iBulletSpeed = 3f;
+    public float raycastDistance;
     public RaycastHit2D hit;
     public LayerMask obstacles;
     private Vector3 initialPosition;
     public SpriteRenderer ballColor;
-    private int numState;
-    public int currentNumState; 
+    [SerializeField] private int numState;
+    public int currentNumState;
+    public Rigidbody2D rb;
+    
 
 
     // Start is called before the first frame update
@@ -22,20 +26,20 @@ public class BallMovement : MonoBehaviour
         initialPosition = this.gameObject.transform.position;
         bulletSpeed = iBulletSpeed;
         ballColor = gameObject.GetComponent<SpriteRenderer>();
-        currentNumState = 2; 
+        numState = 2;
+        raycastDistance = iBulletSpeed / 10; 
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.position += pos * bulletSpeed * Time.deltaTime;
-        hit = Physics2D.Raycast(transform.position, pos, 0.1f, obstacles);
+        rb.MovePosition(transform.position += pos * bulletSpeed * Time.deltaTime);
+        hit = Physics2D.Raycast(transform.position, pos, raycastDistance, obstacles);
+        Debug.DrawLine(transform.position, transform.position + pos * raycastDistance, hit.collider == null ? Color.blue  : Color.red, 0.01f);
 
         if (hit)
         {
             pos = Vector3.Reflect(pos, hit.normal);
-
-
         }
 
         if (this.gameObject.transform.position.y < -10)
@@ -55,7 +59,7 @@ public class BallMovement : MonoBehaviour
 
         if(numState != currentNumState) 
         {
-            numState = currentNumState;
+            currentNumState = numState;
             changeBallColor(currentNumState); 
         }
 
@@ -72,15 +76,20 @@ public class BallMovement : MonoBehaviour
         {
             case 1:
                 ballColor.color = Color.blue;
+                numState = 1;
                 break;
             case 2:
                 ballColor.color = Color.red;
+                numState = 2;
                 break;
             case 3:
                 ballColor.color = Color.green;
+                numState = 3;
                 break;
+                
             default:
                 ballColor.color = Color.black;
+                numState = 0; 
                 break; 
         }
 

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Brick : MonoBehaviour
@@ -11,12 +12,18 @@ public class Brick : MonoBehaviour
     public Sprite _spriteHP1;
     public Sprite _spriteHP2;
     public Sprite _spriteDefault;
+    [SerializeField] private int hitBallColor;
+    private string colorName;
+    public BrickCountManagement pointManagement = null; 
     // Start is called before the first frame update
     void Start()
     {
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         hp = maxHp;
         currentHp = maxHp;
+
+        pointManagement = GameObject.FindObjectOfType<BrickCountManagement>();
+
     }
 
     // Update is called once per frame
@@ -29,7 +36,7 @@ public class Brick : MonoBehaviour
                 UpdateSprite(hp);
             else
             {
-                if (this.gameObject.name == "Angel") { Application.Quit(); }
+                pointManagement.getOnePoint(); 
                 this.gameObject.SetActive(false);
             }
         }
@@ -56,10 +63,38 @@ public class Brick : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ball"))
         {
+            hitBallColor = collision.gameObject.GetComponent<BallMovement>().currentNumState;
 
-            currentHp--;
-            if (currentHp < 0)
-                currentHp = 0;
+            if (isColorMatches(hitBallColor))
+            {
+                currentHp--;
+                if (currentHp < 0)
+                    currentHp = 0;
+            }
         }
+    }
+
+    public bool isColorMatches(int ballState) 
+    {
+        switch (ballState) 
+        {
+            case 1:
+                colorName = "Blue";
+                break;
+            case 2:
+                colorName = "Red";
+                break;
+            case 3:
+                colorName = "Green";
+                break;
+            default:
+                colorName = "Black";
+                break;
+        }
+
+        if (colorName == this.gameObject.tag)
+            return true;
+        else
+            return false; 
     }
 }
