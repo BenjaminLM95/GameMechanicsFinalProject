@@ -16,7 +16,7 @@ public class BallMovement : MonoBehaviour
     [SerializeField] private int numState;
     public int currentNumState;
     public Rigidbody2D rb;
-    
+    public bool superBall; 
 
 
     // Start is called before the first frame update
@@ -27,7 +27,8 @@ public class BallMovement : MonoBehaviour
         bulletSpeed = iBulletSpeed;
         ballColor = gameObject.GetComponent<SpriteRenderer>();
         numState = 2;
-        raycastDistance = iBulletSpeed / 10; 
+        raycastDistance = iBulletSpeed / 10;
+        superBall = false; 
     }
 
     // Update is called once per frame
@@ -86,6 +87,9 @@ public class BallMovement : MonoBehaviour
                 ballColor.color = Color.green;
                 numState = 3;
                 break;
+            case 4:
+                ballColor.color = Color.Lerp(Color.yellow, Color.grey, 0.25f);
+                break;
                 
             default:
                 ballColor.color = Color.black;
@@ -93,5 +97,19 @@ public class BallMovement : MonoBehaviour
                 break; 
         }
 
+    }
+
+    public void superBallActive() 
+    {
+        changeBallColor(4);
+        superBall = true; 
+        Invoke("defaultBallValues", 5f); 
+
+    }
+
+    public void defaultBallValues() 
+    {
+        changeBallColor(2);
+        superBall = false; 
     }
 }

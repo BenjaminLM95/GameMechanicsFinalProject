@@ -64,8 +64,9 @@ public class Brick : MonoBehaviour
         if (collision.gameObject.CompareTag("Ball"))
         {
             hitBallColor = collision.gameObject.GetComponent<BallMovement>().currentNumState;
+            
 
-            if (isColorMatches(hitBallColor))
+            if (isColorMatches(hitBallColor) || hitBallColor == 4)
             {
                 currentHp--;
                 if (currentHp < 0)

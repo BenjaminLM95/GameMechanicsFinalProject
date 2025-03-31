@@ -47,20 +47,20 @@ public class BarMovement : MonoBehaviour
             barStatic(); 
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (Input.GetKeyDown(KeyCode.Alpha1) && !_ball.superBall)
         {
             changeSprite(1);
             _ball.changeBallColor(1); 
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha2))
+        if (Input.GetKeyDown(KeyCode.Alpha2) && !_ball.superBall)
         {
             changeSprite(2);
             _ball.changeBallColor(2);
         }
 
 
-        if (Input.GetKeyDown(KeyCode.Alpha3))
+        if (Input.GetKeyDown(KeyCode.Alpha3) && !_ball.superBall)
         {
             changeSprite(3);
             _ball.changeBallColor(3);
