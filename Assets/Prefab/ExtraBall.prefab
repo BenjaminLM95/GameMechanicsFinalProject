@@ -107,6 +107,9 @@ MonoBehaviour:
   numState: 0
   currentNumState: 0
   rb: {fileID: 2744302576695575320}
+  superBall: 0
+  src: {fileID: 0}
+  aClip: {fileID: 8300000, guid: 03b4fe7d1faea0a4cb32b0f7db67e07b, type: 3}
 --- !u!50 &2744302576695575320
 Rigidbody2D:
   serializedVersion: 4

@@ -16,7 +16,10 @@ public class BallMovement : MonoBehaviour
     [SerializeField] private int numState;
     public int currentNumState;
     public Rigidbody2D rb;
-    public bool superBall; 
+    public bool superBall;
+
+    public AudioSource src;
+    public AudioClip aClip;
 
 
     // Start is called before the first frame update
@@ -28,7 +31,8 @@ public class BallMovement : MonoBehaviour
         ballColor = gameObject.GetComponent<SpriteRenderer>();
         numState = 2;
         raycastDistance = iBulletSpeed / 10;
-        superBall = false; 
+        superBall = false;       
+        src.clip = aClip;
     }
 
     // Update is called once per frame
@@ -41,6 +45,7 @@ public class BallMovement : MonoBehaviour
         if (hit)
         {
             pos = Vector3.Reflect(pos, hit.normal);
+            src.Play();
         }
 
         if (this.gameObject.transform.position.y < -10)
