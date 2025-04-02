@@ -106,6 +106,7 @@ MonoBehaviour:
   _spriteEffect2: {fileID: 21300000, guid: 7c585bbf4d763754fa4f053eb6d38378, type: 3}
   _spriteEffect3: {fileID: 21300000, guid: 967f6c8bdd1e82c4fb19c65329ff4172, type: 3}
   _spriteEffect4: {fileID: 21300000, guid: 6ef2be7d7ff8dac4abea4c5c29b4ae15, type: 3}
+  _spriteEffect5: {fileID: 21300000, guid: 1623633cf25c7e34abc4d2af57830f62, type: 3}
   playerBar: {fileID: 0}
   _ballMovement: {fileID: 0}
   extraBall: {fileID: 850704124194767206, guid: eaf5575eea18efe48af82e5c9b372722, type: 3}

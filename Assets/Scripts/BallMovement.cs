@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using TMPro;
 
 public class BallMovement : MonoBehaviour
 {
-    Vector3 pos = new Vector3();
+    Vector3 dir = new Vector3();
     float bulletSpeed;
     float iBulletSpeed = 3f;
     public float raycastDistance;
@@ -17,15 +18,16 @@ public class BallMovement : MonoBehaviour
     public int currentNumState;
     public Rigidbody2D rb;
     public bool superBall;
-
     public AudioSource src;
     public AudioClip aClip;
+    public LivesMagement liveManagement = null; 
+   
 
 
     // Start is called before the first frame update
     void Start()
     {
-        pos = new Vector3(1, 1, 0);
+        dir = new Vector3(1, 1, 0);
         initialPosition = this.gameObject.transform.position;
         bulletSpeed = iBulletSpeed;
         ballColor = gameObject.GetComponent<SpriteRenderer>();
@@ -33,18 +35,21 @@ public class BallMovement : MonoBehaviour
         raycastDistance = iBulletSpeed / 10;
         superBall = false;       
         src.clip = aClip;
+        liveManagement = GameObject.FindObjectOfType<LivesMagement>();
+
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        rb.MovePosition(transform.position += pos * bulletSpeed * Time.deltaTime);
-        hit = Physics2D.Raycast(transform.position, pos, raycastDistance, obstacles);
-        Debug.DrawLine(transform.position, transform.position + pos * raycastDistance, hit.collider == null ? Color.blue  : Color.red, 0.01f);
+        rb.MovePosition(transform.position += dir * bulletSpeed * Time.deltaTime);
+        hit = Physics2D.Raycast(transform.position, dir, raycastDistance, obstacles);
+        Debug.DrawLine(transform.position, transform.position + dir * raycastDistance, hit.collider == null ? Color.blue  : Color.red, 0.01f);
 
         if (hit)
         {
-            pos = Vector3.Reflect(pos, hit.normal);
+            dir = Vector3.Reflect(dir, hit.normal);
             src.Play();
         }
 
@@ -53,9 +58,10 @@ public class BallMovement : MonoBehaviour
             if (this.name == "Ball")
             {
                 Debug.Log("-1 point");
+                liveManagement.ReduceLife(); 
                 this.gameObject.transform.position = initialPosition;
                 bulletSpeed = iBulletSpeed;
-                pos = new Vector3(1, 1, 0);
+                dir = new Vector3(1, 1, 0);
             }
             else
             {
@@ -116,5 +122,15 @@ public class BallMovement : MonoBehaviour
     {
         changeBallColor(2);
         superBall = false; 
+    }
+
+    public Vector3 GetInitialPosition() 
+    {
+        return initialPosition; 
+    }
+
+    public void gettingMoreLives(int num) 
+    {
+        liveManagement.IncreaseLives(num); 
     }
 }

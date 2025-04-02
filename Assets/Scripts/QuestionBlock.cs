@@ -13,6 +13,7 @@ public class QuestionBlock : MonoBehaviour
     public Sprite _spriteEffect2;
     public Sprite _spriteEffect3;
     public Sprite _spriteEffect4;
+    public Sprite _spriteEffect5;
     public GameObject playerBar;
     public BallMovement _ballMovement;
     public GameObject extraBall;
@@ -52,25 +53,30 @@ public class QuestionBlock : MonoBehaviour
         Vector2 scaleChange = playerBar.gameObject.transform.localScale;
         scaleChange.x += 0.2f; 
 
-        if (number < 25)
+        if (number < 20)
         {            
             spriteRenderer.sprite = _spriteEffect1;
             CreateSecondBall();
         }
-        else if (number < 50)
+        else if (number < 40)
         {
             spriteRenderer.sprite = _spriteEffect2;
             _ballMovement.ballfaster();
         }
-        else if(number < 75) 
+        else if(number < 60) 
         {
             spriteRenderer.sprite = _spriteEffect3;
             _ballMovement.superBallActive(); 
         }
-        else
+        else if(number < 80)
         {
             spriteRenderer.sprite = _spriteEffect4;
             playerBar.gameObject.transform.localScale = scaleChange; 
+        }
+        else 
+        {
+            spriteRenderer.sprite = _spriteEffect5;
+            _ballMovement.gettingMoreLives(2); 
         }
 
         Debug.Log(number);
@@ -78,7 +84,7 @@ public class QuestionBlock : MonoBehaviour
 
     public void CreateSecondBall()
     {
-        GameObject tempBall = Instantiate(extraBall, new Vector3(0f, -2f, 0f), this.transform.rotation) as GameObject;
+        GameObject tempBall = Instantiate(extraBall, _ballMovement.GetInitialPosition(), this.transform.rotation) as GameObject;
         Rigidbody2D tempRigidBodyBall = tempBall.GetComponent<Rigidbody2D>();
         tempRigidBodyBall.gravityScale = 0f;
     }

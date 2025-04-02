@@ -6,7 +6,14 @@ using TMPro;
 public class TimeCounting : MonoBehaviour
 {
     private float gameTime;
-    public TextMeshProUGUI textTimer; 
+    public TextMeshProUGUI textTimer;
+    int hours;
+    int minutes;
+    int seconds;
+    string sHours;
+    string sMinutes;
+    string sSeconds;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -16,9 +23,25 @@ public class TimeCounting : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        gameTime += Time.deltaTime; 
+        gameTime += Time.deltaTime;
 
-        textTimer.text = "Time: " + gameTime;
+        hours = (int)(gameTime / 3600);
+        minutes = (int)(gameTime / 60);
+        seconds = (int)(gameTime % 60);
+
+        sHours = hours.ToString("00");
+        sMinutes = minutes.ToString("00");
+        sSeconds = seconds.ToString("00"); 
+
+        if (hours > 0)
+        {
+            textTimer.text = "Time: " + sHours + ":" + sMinutes + ":" + sSeconds;
+        }
+        else
+        {
+            textTimer.text = "Time: " + sMinutes + ":" + sSeconds;
+        }
+        
         
     }
 }

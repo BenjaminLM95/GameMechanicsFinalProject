@@ -10,12 +10,15 @@ public class BrickCountManagement : MonoBehaviour
     public TextMeshProUGUI pointCountText;
     private int currentPoints;
     public int numberForNextLevel;
-    public string nextSceneName; 
+    public string nextSceneName;
+    
+    
     // Start is called before the first frame update
     void Start()
     {
         points = 0;
-        currentPoints = points; 
+        currentPoints = points;
+        pointCountText.text = "Points:  " + currentPoints + " / " + numberForNextLevel;
     }
 
     // Update is called once per frame
@@ -24,7 +27,7 @@ public class BrickCountManagement : MonoBehaviour
         if(currentPoints != points) 
         {
             currentPoints = points;
-            pointCountText.text = "Points:  " + currentPoints;
+            pointCountText.text = "Points:  " + currentPoints + " / " + numberForNextLevel;
 
             if (currentPoints >= numberForNextLevel)
                 Invoke("GoToNextLevel", 1.5f); 
