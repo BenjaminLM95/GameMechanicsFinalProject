@@ -8,6 +8,7 @@ public class BrickCountManagement : MonoBehaviour
 {
     private int points;
     public TextMeshProUGUI pointCountText;
+    public TextMeshProUGUI WinText;
     private int currentPoints;
     public int numberForNextLevel;
     public string nextSceneName;
@@ -18,7 +19,8 @@ public class BrickCountManagement : MonoBehaviour
     {
         points = 0;
         currentPoints = points;
-        pointCountText.text = "Points:  " + currentPoints + " / " + numberForNextLevel;
+        pointCountText.text = "Bricks:  " + currentPoints + " / " + numberForNextLevel;
+        WinText.gameObject.SetActive(false); 
     }
 
     // Update is called once per frame
@@ -27,10 +29,13 @@ public class BrickCountManagement : MonoBehaviour
         if(currentPoints != points) 
         {
             currentPoints = points;
-            pointCountText.text = "Points:  " + currentPoints + " / " + numberForNextLevel;
+            pointCountText.text = "Bricks:  " + currentPoints + " / " + numberForNextLevel;
 
             if (currentPoints >= numberForNextLevel)
-                Invoke("GoToNextLevel", 1.5f); 
+            {
+                WinText.gameObject.SetActive(true);
+                Invoke("GoToNextLevel", 2f);
+            }
         }
     }
 

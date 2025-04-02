@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class LivesMagement : MonoBehaviour
 {
@@ -25,7 +26,12 @@ public class LivesMagement : MonoBehaviour
             currentLife = lives;
             livesText.text = "Lives: " + currentLife;
         }
-           
+        
+        if(lives <= 0) 
+        {
+            Application.Quit(); 
+        }
+
     }
 
     public void ReduceLife() 
