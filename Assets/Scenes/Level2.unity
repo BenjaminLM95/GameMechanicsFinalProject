@@ -262,7 +262,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 959832985910832686, guid: 2309e7f876092b44ab4e96c63b186670, type: 3}
       propertyPath: m_text
-      value: 'Bricks: 0'
+      value: 'Bricks:'
       objectReference: {fileID: 0}
     - target: {fileID: 959832985910832686, guid: 2309e7f876092b44ab4e96c63b186670, type: 3}
       propertyPath: m_fontSize
@@ -318,7 +318,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3645631652905091382, guid: 2309e7f876092b44ab4e96c63b186670, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 125
+      value: 115
       objectReference: {fileID: 0}
     - target: {fileID: 3645631652905091382, guid: 2309e7f876092b44ab4e96c63b186670, type: 3}
       propertyPath: m_SizeDelta.y
